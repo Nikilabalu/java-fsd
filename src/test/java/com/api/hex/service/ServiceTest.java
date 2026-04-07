@@ -47,7 +47,7 @@ public class ServiceTest {
         BookRespDto dtoWrongAuthor = new BookRespDto(
                 book.getId(),
                 book.getTitle(),
-                "Someone Else",        // different author — should not match
+                "Someone Else",// different author — should not match
                 book.getIsbn(),
                 book.getPublicationYear()
         );

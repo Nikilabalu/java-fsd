@@ -1,5 +1,5 @@
 package com.api.hex.controller;
-
+import com.api.hex.dto.BookFilterReqDto;
 import com.api.hex.dto.BookPageRespDto;
 import com.api.hex.dto.BookReqDto;
 import com.api.hex.dto.BookRespDto;
@@ -9,9 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/book")
 @AllArgsConstructor
@@ -40,6 +38,12 @@ public class BookController {
                                         @Valid @RequestBody BookReqDto bookReqDto) {
         bookService.updateBook(isbn, bookReqDto);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @PostMapping("/filter")
+    public ResponseEntity<List<BookRespDto>> getByFilter(@RequestBody BookFilterReqDto bookFilterReqDto) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(bookService.getByFilter(bookFilterReqDto));
     }
     @DeleteMapping("/delete/{isbn}")
     public ResponseEntity<?> deleteBook(@PathVariable String isbn) {

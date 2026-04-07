@@ -1,5 +1,6 @@
 package com.api.hex.service;
 
+import com.api.hex.dto.BookFilterReqDto;
 import com.api.hex.dto.BookPageRespDto;
 import com.api.hex.dto.BookReqDto;
 import com.api.hex.dto.BookRespDto;
@@ -64,7 +65,16 @@ public class BookService {
         // Step 3: Save updated entity
         bookRepository.save(existing);
     }
-
+    public List<BookRespDto> getByFilter(BookFilterReqDto bookFilterReqDto) {
+        return bookRepository.filterBooks(
+                        bookFilterReqDto.title(),
+                        bookFilterReqDto.author(),
+                        bookFilterReqDto.publicationYear()
+                )
+                .stream()
+                .map(BookMapper::mapToDto)
+                .toList();
+    }
     public void deleteByIsbn(String isbn) {
         Book book = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new ResourceNotFoundException("Book not found with ISBN: " + isbn));
