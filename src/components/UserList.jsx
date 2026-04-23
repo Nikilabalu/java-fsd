@@ -28,39 +28,42 @@ const UserList = () => {
         fetchUsers()
     }, [])
 
-    const deleteUser = async(id) => {
+    const deleteUser = async (id) => {
         try {
             await axios.delete(deleteApi + id)
             setUsers(users.filter((p) => p.id !== id))
+            console.log("deleted")
         }
         catch (err) {
             setErrorMsg(err.message)
         }
     }
-    return(
+    return (
         <div className="container">
             <div className="row mt-4">
                 <div className="col mg-8">
                     <div>
-                                <Link to="/users" className="btn btn-outline-light me-2">User List</Link>
-                                <Link to="/add-user" className="btn btn-outline-light">Add User</Link>
-                            </div>
+                        <Link to="/users" className="btn btn-outline-light me-2">User List</Link>
+                        <Link to="/add-user" className="btn btn-outline-light">Add User</Link>
+                    </div>
                     <div className="card">
                         <div className="card-header">Users List </div>
                         <div className="card-body">
                             <table className="table">
                                 <thead>
                                     <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Company Name</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Company Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     {users.map((p, id) => (
                                         <tr key={id}>
+                                            <th scope="row">{id + 1}</th>
                                             <td>{p.name}</td>
                                             <td>{p.email}</td>
                                             <td>{p.phone}</td>
