@@ -63,7 +63,7 @@ const UserList = () => {
 
                                     {users.map((p, id) => (
                                         <tr key={id}>
-                                            <th scope="row">{id + 1}</th>
+                                            <th scope="row">{p.id}</th>
                                             <td>{p.name}</td>
                                             <td>{p.email}</td>
                                             <td>{p.phone}</td>
